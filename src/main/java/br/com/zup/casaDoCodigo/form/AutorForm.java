@@ -5,7 +5,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import br.com.zup.casaDoCodigo.entities.Autor;
+import br.com.zup.casaDoCodigo.validation.AutorFormValid;
 
+@AutorFormValid
 public class AutorForm {
 	
 	@NotBlank (message = "o campo nome é obrigatório")
