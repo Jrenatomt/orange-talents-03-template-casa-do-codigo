@@ -8,12 +8,12 @@ import br.com.zup.casaDoCodigo.entities.Autor;
 
 public class AutorForm {
 	
-	@NotBlank
+	@NotBlank (message = "o campo nome é obrigatório")
 	private String nome;
-	@NotBlank
+	@NotBlank@NotBlank (message = "o campo e-mail é obrigatório")
 	@Email
 	private String email;
-	@NotBlank 
+	@NotBlank @NotBlank(message = "o campo descrição é obrigatório")
 	@Size (max = 400)
 	private String descricao;
 	
@@ -29,7 +29,7 @@ public class AutorForm {
 		return descricao;
 	}
 
-	public Autor novoAutor() {
+	public Autor converterNovoAutor() {
 		return new Autor(nome, email, descricao);
 	}
 }

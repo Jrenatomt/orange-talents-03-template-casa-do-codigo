@@ -13,12 +13,12 @@ public class ValidationExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationError> validation(MethodArgumentNotValidException e) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		ValidationError err = new ValidationError();
+		ValidationError erro = new ValidationError();
 		
 		for (FieldError f : e.getBindingResult().getFieldErrors()) {
-			err.addError(f.getField(), f.getDefaultMessage());
+			erro.addError(f.getField(), f.getDefaultMessage());
 		}
-		return ResponseEntity.status(status).body(err);
+		return ResponseEntity.status(status).body(erro);
 	}
 
 }

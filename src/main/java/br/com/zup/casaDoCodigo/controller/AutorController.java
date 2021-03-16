@@ -24,8 +24,8 @@ public class AutorController {
 	
 	@PostMapping
 	@Transactional
-	public void CadastrarAutor(@RequestBody @Valid AutorForm form){
-		Autor novoAutor = form.novoAutor();
+	public void cadastrarAutor(@RequestBody @Valid AutorForm form){
+		Autor novoAutor = form.converterNovoAutor();
 		repository.save(novoAutor);
 	}
 }
