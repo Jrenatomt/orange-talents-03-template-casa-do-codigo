@@ -1,5 +1,7 @@
 package br.com.zup.casaDoCodigo.controller;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -10,22 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.casaDoCodigo.entities.Autor;
 import br.com.zup.casaDoCodigo.form.AutorForm;
-import br.com.zup.casaDoCodigo.repositories.AutorRepository;
 
 @RestController
 @RequestMapping(value = "/autores")
 public class AutorController {
 	
-	private final AutorRepository repository;
-	
-	public AutorController(AutorRepository repository) {
-		this.repository = repository;
-	}
+	@PersistenceContext
+    private EntityManager manager;
 	
 	@PostMapping
 	@Transactional
-	public void cadastrarAutor(@RequestBody @Valid AutorForm form){
+	public String cadastrarAutor(@RequestBody @Valid AutorForm form){
 		Autor novoAutor = form.converterNovoAutor();
-		repository.save(novoAutor);
-	}
+		manager.persist(novoAutor);
+		return novoAutor.toString();
+   }
 }

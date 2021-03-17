@@ -27,6 +27,7 @@ public class Autor {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant dataCadastro;
 	
+	@Deprecated
 	public Autor() {
 	}
 
@@ -35,9 +36,11 @@ public class Autor {
 		this.email = email;
 		this.descricao = descricao;
 	}
-
-	public Long getId() {
-		return id;
+	
+	@Override
+	public String toString() {
+		return "Autor [id=" + id + ", nome=" + nome + ", email=" + email + ", descricao=" + descricao
+				+ ", dataCadastro=" + dataCadastro + "]";
 	}
 
 	public String getNome() {
