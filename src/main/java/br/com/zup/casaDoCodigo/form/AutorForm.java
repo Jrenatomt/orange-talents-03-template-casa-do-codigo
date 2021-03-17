@@ -5,16 +5,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import br.com.zup.casaDoCodigo.entities.Autor;
-import br.com.zup.casaDoCodigo.validation.AutorFormValid;
+import br.com.zup.casaDoCodigo.validation.UniqueValue;
 
-@AutorFormValid
 public class AutorForm {
 	
 	@NotBlank (message = "o campo nome é obrigatório")
 	private String nome;
-	@NotBlank@NotBlank (message = "o campo e-mail é obrigatório")
+	
 	@Email
+	@NotBlank (message = "o campo e-mail é obrigatório")
+	@UniqueValue(domainClass = Autor.class, fieldName = "email")
 	private String email;
+	
 	@NotBlank @NotBlank(message = "o campo descrição é obrigatório")
 	@Size (max = 400)
 	private String descricao;
