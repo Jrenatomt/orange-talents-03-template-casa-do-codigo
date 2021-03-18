@@ -16,16 +16,17 @@ import br.com.zup.casaDoCodigo.repositories.AutorRepository;
 @RequestMapping(value = "/autores")
 public class AutorController {
 	
-	private final AutorRepository repository;
-	
+    private final AutorRepository repository;
+    	
 	public AutorController(AutorRepository repository) {
 		this.repository = repository;
 	}
-	
+
 	@PostMapping
 	@Transactional
-	public void cadastrarAutor(@RequestBody @Valid AutorForm form){
+	public String cadastrarAutor(@RequestBody @Valid AutorForm form){
 		Autor novoAutor = form.converterNovoAutor();
 		repository.save(novoAutor);
-	}
+		return novoAutor.toString();
+   }
 }

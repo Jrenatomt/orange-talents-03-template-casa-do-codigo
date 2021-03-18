@@ -21,11 +21,11 @@ public class CategoriaController {
 	public CategoriaController(CategoriaRepository repository) {
 		this.repository = repository;
 	}
-	
-    @PostMapping
+
+	@PostMapping
     @Transactional
 	public String cadastrarCategoria(@RequestBody @Valid CategoriaForm form) {
-		Categoria novaCategoria = new Categoria(form.getNome());
+		Categoria novaCategoria = form.toModel();
 		repository.save(novaCategoria);
 		return novaCategoria.toString();	
 	}
