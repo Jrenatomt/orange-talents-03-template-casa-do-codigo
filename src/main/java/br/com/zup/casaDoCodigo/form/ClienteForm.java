@@ -96,8 +96,10 @@ public class ClienteForm {
 		Estado estado = null;
 		if (estadoId != null)
 			estado = estadoRepository.getOne(estadoId);
-
-		return new Cliente(email, nome, sobrenome, documento, endereco, complemento, 
-				cidade, telefone, cep, pais, estado);
+		if (estado.pertence(this.paisId)){
+		return new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, telefone, cep, pais,
+				estado);
 	}
+		throw new IllegalArgumentException("Esse estado não é do País selecionado");
+    }
 }
