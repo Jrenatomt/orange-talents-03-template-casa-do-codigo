@@ -45,4 +45,8 @@ public class Estado {
 	public String toString() {
 		return "Estado [id=" + id + ", nome=" + nome + ", pais=" + pais + "]";
 	}
+	
+	public boolean pertence(Long PaisId) {
+		return pais.getId().equals(PaisId);
+	}
 }
