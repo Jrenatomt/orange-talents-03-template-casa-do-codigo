@@ -102,7 +102,7 @@ public class ClienteForm {
 					.orElseThrow(() -> new EntityNotFoundException("estado não Encontrado."));
 			cliente.setEstado(estado);
 
-			if (!estado.pertence(pais.getId())) {
+			if (!estado.pertence(pais)) {
 				throw new IllegalArgumentException("Estado não pertence ao País informado");
 			}
 		}

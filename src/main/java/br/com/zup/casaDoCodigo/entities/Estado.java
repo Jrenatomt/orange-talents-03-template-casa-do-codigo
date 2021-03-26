@@ -50,7 +50,7 @@ public class Estado {
 		return "Estado [id=" + id + ", nome=" + nome + ", pais=" + pais + "]";
 	}
 	
-	public boolean pertence(Long PaisId) {
-		return pais.getId().equals(PaisId);
+	public boolean pertence(Pais pais) {
+		return this.pais.equals(pais);
 	}
 }
