@@ -33,6 +33,10 @@ public class Estado {
 		this.pais = pais;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

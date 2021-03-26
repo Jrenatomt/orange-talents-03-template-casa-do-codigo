@@ -40,6 +40,7 @@ public class ClienteForm {
 	@NotNull
 	@UniqueValue(domainClass = Cliente.class, fieldName = "id")
 	private Long paisId;
+	@UniqueValue(domainClass = Cliente.class, fieldName = "id")
 	private Long estadoId;
 
 	@Deprecated
@@ -88,18 +89,23 @@ public class ClienteForm {
 
 	public Long getEstadoId() {
 		return estadoId;
-	}
-
+	} 
+	
 	public Cliente toModel(PaisRepository paisRepository, EstadoRepository estadoRepository) {
 		Pais pais = paisRepository.findById(paisId)
 				.orElseThrow(() -> new EntityNotFoundException("País não Encontrado."));
-		Estado estado = null;
-		if (estadoId != null)
-			estado = estadoRepository.getOne(estadoId);
-		if (estado.pertence(this.paisId)){
-		return new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, telefone, cep, pais,
-				estado);
+		Cliente cliente = new Cliente(email, nome, sobrenome, documento, endereco, complemento, cidade, telefone, cep,
+				pais);
+
+		if (estadoId != null) {
+			Estado estado = estadoRepository.findById(estadoId)
+					.orElseThrow(() -> new EntityNotFoundException("estado não Encontrado."));
+			cliente.setEstado(estado);
+
+			if (!estado.pertence(pais.getId())) {
+				throw new IllegalArgumentException("Estado não pertence ao País informado");
+			}
+		}
+		return cliente;
 	}
-		throw new IllegalArgumentException("Esse estado não é do País selecionado");
-    }
 }

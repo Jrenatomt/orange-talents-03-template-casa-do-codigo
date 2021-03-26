@@ -46,7 +46,7 @@ public class Cliente {
 	
 	public Cliente(@NotBlank @Email String email, @NotBlank String nome, @NotBlank String sobrenome,
 			@NotBlank String documento, @NotBlank String endereco, @NotBlank String complemento,
-			@NotBlank String cidade, @NotBlank String telefone, @NotBlank String cep, @NotNull Pais pais, Estado estado) {
+			@NotBlank String cidade, @NotBlank String telefone, @NotBlank String cep, @NotNull Pais pais) {
 		super();
 		this.email = email;
 		this.nome = nome;
@@ -58,10 +58,17 @@ public class Cliente {
 		this.telefone = telefone;
 		this.cep = cep;
 		this.pais = pais;
-		this.estado = estado;
 	}
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Estado getEstado() {
+		return estado;
 	}
 }
